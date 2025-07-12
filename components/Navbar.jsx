@@ -1,6 +1,8 @@
-"use client"
+"use client";
 import React, { useState } from "react";
-import { Menu, X, Recycle, User } from "lucide-react";
+import { Menu, X, Recycle } from "lucide-react";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import Link from "next/link";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -8,7 +10,7 @@ export default function Navbar() {
   return (
     <nav className="bg-gradient-to-b from-[#140024] to-[#2d0052] text-white px-6 py-4">
       <div className="flex justify-between items-center max-w-7xl mx-auto">
-        {/* Logo with icon */}
+        {/* Logo */}
         <div className="flex items-center space-x-2 text-xl font-extrabold">
           <Recycle className="w-5 h-5 text-[#ec4899]" />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#ec4899]">
@@ -16,22 +18,30 @@ export default function Navbar() {
           </span>
         </div>
 
-        {/* Desktop Nav Links */}
+        {/* Desktop Nav */}
         <ul className="hidden md:flex space-x-8 text-sm font-bold">
-          <li><a href="#" className="hover:text-[#ff4ecd]">Home</a></li>
-          <li><a href="#" className="hover:text-[#ff4ecd]">About</a></li>
-          <li><a href="#" className="hover:text-[#ff4ecd]">Features</a></li>
-          <li><a href="#" className="hover:text-[#ff4ecd]">Items</a></li>
-          <li><a href="#" className="hover:text-[#ff4ecd]">Contact</a></li>
+          <li><Link href="#" className="hover:text-[#ff4ecd]">Home</Link></li>
+          <li><Link href="#" className="hover:text-[#ff4ecd]">About</Link></li>
+          <li><Link href="#" className="hover:text-[#ff4ecd]">Features</Link></li>
+          <li><Link href="#" className="hover:text-[#ff4ecd]">Items</Link></li>
+          <li><Link href="#" className="hover:text-[#ff4ecd]">Contact</Link></li>
         </ul>
 
-        {/* Auth Buttons */}
+        {/* Auth Buttons for Desktop */}
         <div className="hidden md:flex items-center space-x-4">
-          <button className="text-sm text-white hover:text-[#ff4ecd] font-bold">Sign In</button>
-          <User className="w-7 h-7 text-[#ff4ecd] hover:text-[#f9a8d4] cursor-pointer" />
+          <SignedOut>
+            <SignInButton>
+              <button className="text-sm text-white hover:text-[#ff4ecd] font-bold">
+                Sign In
+              </button>
+            </SignInButton>
+          </SignedOut>
+          <SignedIn>
+            <UserButton afterSignOutUrl="/" />
+          </SignedIn>
         </div>
 
-        {/* Mobile Menu Icon */}
+        {/* Mobile Menu Button */}
         <div className="md:hidden">
           <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
             {mobileMenuOpen ? (
@@ -43,17 +53,27 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Dropdown */}
       {mobileMenuOpen && (
         <div className="md:hidden mt-4 space-y-3 text-sm font-bold text-center">
-          <a href="#" className="block text-white hover:text-[#ff4ecd]">Home</a>
-          <a href="#" className="block text-white hover:text-[#ff4ecd]">About</a>
-          <a href="#" className="block text-white hover:text-[#ff4ecd]">Features</a>
-          <a href="#" className="block text-white hover:text-[#ff4ecd]">Items</a>
-          <a href="#" className="block text-white hover:text-[#ff4ecd]">Contact</a>
+          <Link href="#" className="block text-white hover:text-[#ff4ecd]">Home</Link>
+          <Link href="#" className="block text-white hover:text-[#ff4ecd]">About</Link>
+          <Link href="#" className="block text-white hover:text-[#ff4ecd]">Features</Link>
+          <Link href="#" className="block text-white hover:text-[#ff4ecd]">Items</Link>
+          <Link href="#" className="block text-white hover:text-[#ff4ecd]">Contact</Link>
           <hr className="border-purple-600 my-2" />
-          <button className="block w-full text-white hover:text-[#ff4ecd] font-bold">Sign In</button>
-          <User className="mx-auto w-7 h-7 text-[#ff4ecd] hover:text-[#f9a8d4] cursor-pointer" />
+          <SignedOut>
+            <SignInButton>
+              <button className="block w-full text-white hover:text-[#ff4ecd] font-bold">
+                Sign In
+              </button>
+            </SignInButton>
+          </SignedOut>
+          <SignedIn>
+            <div className="flex justify-center">
+              <UserButton afterSignOutUrl="/" />
+            </div>
+          </SignedIn>
         </div>
       )}
     </nav>
