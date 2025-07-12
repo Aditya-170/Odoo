@@ -25,23 +25,3 @@ export async function GET(req) {
   }
 }
 
-// POST - Create a new notification (optional for testing/admin)
-export async function POST(req) {
-  try {
-    await dbConnect();
-    const body = await req.json();
-    const { user, swap, message, status } = body;
-
-    const newNotification = await Notification.create({
-      user,
-      swap,
-      message,
-      status,
-    });
-
-    return NextResponse.json(newNotification);
-  } catch (err) {
-    console.error("Error creating notification:", err);
-    return NextResponse.json({ error: "Server error" }, { status: 500 });
-  }
-}
