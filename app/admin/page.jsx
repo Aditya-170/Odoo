@@ -33,43 +33,98 @@ export default function AdminPanel() {
     { id: 5, title: "Wool Sweater", owner: "Sneha Joshi", status: "Rejected" },
   ];
 
+  const getStatusColor = (status) => {
+    switch (status.toLowerCase()) {
+      case 'active':
+      case 'delivered':
+        return 'text-green-400';
+      case 'pending':
+        return 'text-yellow-400';
+      case 'shipped':
+        return 'text-blue-400';
+      case 'inactive':
+      case 'returned':
+      case 'rejected':
+        return 'text-red-400';
+      default:
+        return 'text-purple-300';
+    }
+  };
+
   const renderContent = () => {
     if (activeTab === "Manage Users") {
       return users.map((user) => (
-        <div key={user.id} className="flex flex-col sm:flex-row items-center justify-between bg-[#1f012f] p-4 rounded-xl shadow-md gap-4 border border-purple-700 transition-transform duration-300 hover:scale-[1.02]">
-          <img src={user.image} alt={user.name} className="w-16 h-16 rounded-full object-cover border-2 border-pink-500" />
-          <div className="text-center sm:text-left flex-1">
-            <h3 className="text-lg font-bold text-[#ff4ecd]">{user.name}</h3>
-            <p className="text-sm text-gray-300">{user.email}</p>
-            <p className="text-xs text-purple-300">Phone: {user.phone}</p>
-          </div>
-          <div className="flex gap-2">
-            <button className="px-4 py-1 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 text-white text-xs font-bold shadow-md hover:scale-105 transition-transform">Promote</button>
-            <button className="px-4 py-1 rounded-full bg-red-500 hover:bg-red-600 text-white text-xs font-bold shadow-md hover:scale-105 transition-transform">Remove</button>
+        <div key={user.id} className="group p-6 bg-purple-900/20 backdrop-blur-sm border border-purple-500/20 rounded-2xl hover:bg-purple-900/30 transition-all duration-300 transform hover:scale-[1.02]">
+          <div className="flex flex-col sm:flex-row items-center gap-6">
+            <div className="relative">
+              <img 
+                src={user.image} 
+                alt={user.name} 
+                className="w-16 h-16 rounded-full object-cover border-2 border-purple-500/50 shadow-lg" 
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+            
+            <div className="flex-1 text-center sm:text-left">
+              <h3 className="text-lg font-bold text-purple-200 mb-1">{user.name}</h3>
+              <p className="text-sm text-purple-300 mb-1">{user.email}</p>
+              <p className="text-xs text-purple-400">{user.phone}</p>
+            </div>
+            
+            <div className="flex gap-3">
+              <button className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-white text-sm font-semibold shadow-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105">
+                Promote
+              </button>
+              <button className="px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 rounded-full text-white text-sm font-semibold shadow-lg hover:from-red-600 hover:to-red-700 transition-all duration-300 transform hover:scale-105">
+                Remove
+              </button>
+            </div>
           </div>
         </div>
       ));
     } else if (activeTab === "Manage Orders") {
       return orders.map((order) => (
-        <div key={order.id} className="flex flex-col sm:flex-row items-center justify-between bg-[#1f012f] p-4 rounded-xl shadow-md gap-4 text-sm border border-purple-700 transition-transform duration-300 hover:scale-[1.02]">
-          <p className="text-[#ff4ecd] font-bold">{order.user}</p>
-          <p className="text-white">Item: {order.item}</p>
-          <p className="text-purple-300">Status: {order.status}</p>
-          <div className="flex gap-2">
-            <button className="px-4 py-1 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 text-white text-xs font-bold shadow-md hover:scale-105 transition-transform">Update</button>
-            <button className="px-4 py-1 rounded-full bg-red-500 hover:bg-red-600 text-white text-xs font-bold shadow-md hover:scale-105 transition-transform">Cancel</button>
+        <div key={order.id} className="group p-6 bg-purple-900/20 backdrop-blur-sm border border-purple-500/20 rounded-2xl hover:bg-purple-900/30 transition-all duration-300 transform hover:scale-[1.02]">
+          <div className="flex flex-col sm:flex-row items-center gap-6">
+            <div className="flex-1 text-center sm:text-left">
+              <h3 className="text-lg font-bold text-purple-200 mb-1">{order.user}</h3>
+              <p className="text-sm text-purple-300 mb-1">Item: {order.item}</p>
+              <p className={`text-sm font-semibold ${getStatusColor(order.status)}`}>
+                Status: {order.status}
+              </p>
+            </div>
+            
+            <div className="flex gap-3">
+              <button className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-white text-sm font-semibold shadow-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105">
+                Update
+              </button>
+              <button className="px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 rounded-full text-white text-sm font-semibold shadow-lg hover:from-red-600 hover:to-red-700 transition-all duration-300 transform hover:scale-105">
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
       ));
     } else {
       return listings.map((listing) => (
-        <div key={listing.id} className="flex flex-col sm:flex-row items-center justify-between bg-[#1f012f] p-4 rounded-xl shadow-md gap-4 text-sm border border-purple-700 transition-transform duration-300 hover:scale-[1.02]">
-          <p className="text-[#ff4ecd] font-bold">{listing.title}</p>
-          <p className="text-white">Owner: {listing.owner}</p>
-          <p className="text-purple-300">Status: {listing.status}</p>
-          <div className="flex gap-2">
-            <button className="px-4 py-1 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 text-white text-xs font-bold shadow-md hover:scale-105 transition-transform">Approve</button>
-            <button className="px-4 py-1 rounded-full bg-red-500 hover:bg-red-600 text-white text-xs font-bold shadow-md hover:scale-105 transition-transform">Reject</button>
+        <div key={listing.id} className="group p-6 bg-purple-900/20 backdrop-blur-sm border border-purple-500/20 rounded-2xl hover:bg-purple-900/30 transition-all duration-300 transform hover:scale-[1.02]">
+          <div className="flex flex-col sm:flex-row items-center gap-6">
+            <div className="flex-1 text-center sm:text-left">
+              <h3 className="text-lg font-bold text-purple-200 mb-1">{listing.title}</h3>
+              <p className="text-sm text-purple-300 mb-1">Owner: {listing.owner}</p>
+              <p className={`text-sm font-semibold ${getStatusColor(listing.status)}`}>
+                Status: {listing.status}
+              </p>
+            </div>
+            
+            <div className="flex gap-3">
+              <button className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-white text-sm font-semibold shadow-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105">
+                Approve
+              </button>
+              <button className="px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 rounded-full text-white text-sm font-semibold shadow-lg hover:from-red-600 hover:to-red-700 transition-all duration-300 transform hover:scale-105">
+                Reject
+              </button>
+            </div>
           </div>
         </div>
       ));
@@ -77,25 +132,54 @@ export default function AdminPanel() {
   };
 
   return (
-    <>
+    <div className="min-h-screen bg-black">
       <Navbar />
-      <div className="px-4 py-6 bg-gradient-to-b from-[#140024] to-[#2d0052] min-h-screen text-white">
-        <div className="flex flex-wrap gap-4 justify-center mb-8">
-          {tabs.map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-6 py-2 rounded-full font-semibold text-sm bg-gradient-to-r from-[#a855f7] to-[#ec4899] hover:from-[#9333ea] hover:to-[#f472b6] transition duration-300 ${
-                activeTab === tab ? "ring-2 ring-pink-400" : ""
-              }`}
-            >
-              {tab}
-            </button>
-          ))}
+      
+      {/* Main Content */}
+      <div className="relative pt-24 pb-16 px-4 overflow-hidden">
+        {/* Animated Background Elements - matching home page */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-20 left-10 w-32 h-32 bg-purple-500/20 rounded-full blur-xl animate-pulse"></div>
+          <div className="absolute bottom-20 right-10 w-48 h-48 bg-purple-600/20 rounded-full blur-xl animate-pulse delay-1000"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-purple-400/10 rounded-full blur-2xl animate-pulse delay-500"></div>
         </div>
-        <div className="space-y-6 max-w-4xl mx-auto">{renderContent()}</div>
+        
+        <div className="relative max-w-6xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-300 bg-clip-text text-transparent">
+              Admin Panel
+            </h1>
+            <p className="text-xl text-purple-200 leading-relaxed">
+              Manage your platform with ease and efficiency
+            </p>
+          </div>
+          
+          {/* Tab Navigation */}
+          <div className="flex flex-wrap gap-4 justify-center mb-12">
+            {tabs.map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`px-8 py-4 rounded-full font-semibold text-sm transition-all duration-300 transform hover:scale-105 ${
+                  activeTab === tab 
+                    ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg shadow-purple-500/25" 
+                    : "bg-purple-500/20 backdrop-blur-sm border border-purple-400/30 text-purple-200 hover:bg-purple-500/30"
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+          
+          {/* Content Area */}
+          <div className="space-y-6">
+            {renderContent()}
+          </div>
+        </div>
       </div>
+      
       <Footer />
-    </>
+    </div>
   );
 }
