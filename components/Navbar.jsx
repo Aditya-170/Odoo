@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { ChevronLeft, ChevronRight, Star, Users, Package, Recycle, Search, Heart, Sparkles, TrendingUp, Shield, Leaf } from 'lucide-react';
 
-
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
