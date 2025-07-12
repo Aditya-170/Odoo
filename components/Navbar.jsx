@@ -25,7 +25,10 @@ export default function Navbar() {
             <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
               <Sparkles className="w-5 h-5 text-white" />
             </div>
-            <span className="text-xl font-bold text-purple-200">ReWear</span>
+            <span className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
+              ReWear
+            </span>
+
           </div>
 
           {/* Desktop Nav */}
