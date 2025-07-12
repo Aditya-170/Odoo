@@ -7,7 +7,7 @@ import {
   UserButton,
   useUser,
 } from "@clerk/nextjs";
-import { Menu, X } from "lucide-react";
+import { Menu, Sparkles, X } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -22,7 +22,9 @@ export default function Navbar() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
+            <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+              <Sparkles className="w-5 h-5 text-white" />
+            </div>
             <span className="text-xl font-bold text-purple-200">ReWear</span>
           </div>
 
