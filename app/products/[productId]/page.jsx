@@ -81,7 +81,7 @@ const ProductDetail = () => {
               <div className="mt-6 pt-6 border-t border-purple-400/20">
                 <div className="text-xl font-bold text-blue-300 mb-3">Product Details</div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-base text-purple-100">
-                  {typeof product.point !== 'undefined' && (
+                  {product.condition  && (
                     <div><span className="font-bold text-purple-200">Points:</span> <span className="inline-block px-3 py-1 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs font-bold ml-2">{product.point}</span></div>
                   )}
                   {product.category && <div><span className="font-bold text-purple-200">Category:</span> {product.category}</div>}
