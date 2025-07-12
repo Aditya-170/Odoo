@@ -42,3 +42,11 @@ body {
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #d946ef;
 }
+input::placeholder,
+textarea::placeholder {
+  color: #d3d3d3 !important;
+}
+input, textarea {
+  color: #ffffff !important;
+  text-color: #ffffff !important;
+}
