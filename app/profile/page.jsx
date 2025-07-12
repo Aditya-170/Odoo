@@ -3,6 +3,9 @@
 import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import {
+  useUser,
+} from "@clerk/nextjs";
 
 const profile = {
   name: "Anjali Kapoor",
@@ -27,6 +30,8 @@ const purchases = Array.from({ length: 15 }, (_, i) => ({
 }));
 
 export default function ProfilePage() {
+  const { user } = useUser();
+  console.log("user", user)
   return (
     <>
       <Navbar />
@@ -36,19 +41,22 @@ export default function ProfilePage() {
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 items-center">
           <div className="flex justify-center">
             <img
-              src={profile.image}
-              alt={profile.name}
+              src={user.imageUrl || "/img4.png"}
+              alt={user.fullName || "Profile Picture"}
               className="w-40 h-40 rounded-full object-cover border-4 border-pink-500 shadow-lg"
             />
           </div>
           <div className="md:col-span-2 space-y-4 text-center md:text-left bg-[#1f012f] p-6 rounded-xl border border-purple-700 shadow-md">
-            <h2 className="text-3xl font-extrabold text-[#ff4ecd]">{profile.name}</h2>
+            <h2 className="text-3xl font-extrabold text-[#ff4ecd]">{user.fullName}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-300">
-              <p><span className="font-semibold text-white">📧 Email:</span> {profile.email}</p>
-              <p><span className="font-semibold text-white">📱 Phone:</span> {profile.phone}</p>
+              <p><span className="font-semibold text-white">📧 Email:</span> {user.emailAddresses[0]?.emailAddress}</p>
+              <p><span className="font-semibold text-white">📱 Phone:</span>  {user.phoneNumbers[0]?.phoneNumber || "Not Provided"}</p>
               <p><span className="font-semibold text-white">🌟 Points Earned:</span> {profile.points} pts</p>
               <p><span className="font-semibold text-white">👕 Clothes Swapped:</span> {profile.swaps}</p>
-              <p><span className="font-semibold text-white">📅 Member Since:</span> {profile.memberSince}</p>
+              <p><span className="font-semibold text-white">📅 Member Since:</span>  {new Date(user.createdAt).toLocaleDateString("en-IN", {
+                  month: "long",
+                  year: "numeric",
+                })}</p>
               <p><span className="font-semibold text-white">🏆 Level:</span> Premium Recycler ♻️</p>
             </div>
             <p className="text-purple-300 italic pt-2">“Reusing fashion, rewriting the future ✨”</p>
