@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import {
   useUser,
 } from "@clerk/nextjs";
-
+import { useUserProducts } from "../context/UserProductsContext";
 const profile = {
   name: "Anjali Kapoor",
   email: "anjali@example.com",
@@ -30,6 +30,7 @@ const purchases = Array.from({ length: 15 }, (_, i) => ({
 }));
 
 export default function ProfilePage() {
+   const { products, loading, error } = useUserProducts();
   const { user } = useUser();
   console.log("user", user)
   return (
@@ -67,13 +68,13 @@ export default function ProfilePage() {
         <div className="max-w-6xl mx-auto mb-16">
           <h3 className="text-2xl font-bold mb-4 text-pink-400">My Listings</h3>
           <div className="flex overflow-x-auto gap-4 pb-4 custom-scrollbar">
-            {listings.map((item) => (
+            {products.map((item) => (
               <div
-                key={item.id}
+                key={item._id}
                 className="min-w-[160px] bg-[#1f012f] rounded-lg shadow-md border border-purple-700 p-3 hover:scale-105 transition-transform"
               >
                 <img
-                  src={item.image}
+                  src={item.images[0]}
                   alt={item.title}
                   className="w-full h-32 object-cover rounded-md mb-2"
                 />

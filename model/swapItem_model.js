@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const swapItemSchema = new mongoose.Schema(
   {
     owner1: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: String,
       ref: "User",
       required: true,
     },
@@ -13,7 +13,7 @@ const swapItemSchema = new mongoose.Schema(
       required: true,
     },
     owner2: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: String,
       ref: "User",
       required: true,
     },
