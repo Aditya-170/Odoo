@@ -1,13 +1,16 @@
 "use client";
 import React, { useState } from "react";
+
 import { Menu, X, Recycle } from "lucide-react";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
+
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
+
     <nav className="bg-gradient-to-b from-[#140024] to-[#2d0052] text-white px-6 py-4">
       <div className="flex justify-between items-center max-w-7xl mx-auto">
         {/* Logo */}
@@ -50,7 +53,12 @@ export default function Navbar() {
               <Menu className="w-6 h-6 text-[#ff4ecd]" />
             )}
           </button>
+
         </div>
+        
+        <button className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-white font-medium hover:from-purple-600 hover:to-pink-600 transition-all duration-300">
+          Sign In
+        </button>
       </div>
 
       {/* Mobile Dropdown */}
@@ -77,5 +85,6 @@ export default function Navbar() {
         </div>
       )}
     </nav>
+
   );
 }
