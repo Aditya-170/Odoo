@@ -36,7 +36,7 @@ export default function Navbar() {
             <Link href="/home" className="text-purple-300 hover:text-purple-200 transition-colors">Home</Link>
             <Link href="/about" className="text-purple-300 hover:text-purple-200 transition-colors">About</Link>
             <Link href="#" className="text-purple-300 hover:text-purple-200 transition-colors">Features</Link>
-            <Link href="#" className="text-purple-300 hover:text-purple-200 transition-colors">Items</Link>
+            <Link href="/products" className="text-purple-300 hover:text-purple-200 transition-colors">Items</Link>
             <Link href="/contact" className="text-purple-300 hover:text-purple-200 transition-colors">Contact</Link>
           </div>
 
@@ -48,11 +48,7 @@ export default function Navbar() {
                   Sign In
                 </button>
               </SignInButton>
-              <SignInButton mode="modal">
-                <button className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-white hover:from-purple-600 hover:to-pink-600 transition-all duration-300">
-                  Join Now
-                </button>
-              </SignInButton>
+              
             </SignedOut>
 
             <SignedIn>
@@ -97,11 +93,7 @@ export default function Navbar() {
                 Sign In
               </button>
             </SignInButton>
-            <SignInButton mode="modal">
-              <button className="w-full px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-white hover:from-purple-600 hover:to-pink-600 transition-all duration-300">
-                Join Now
-              </button>
-            </SignInButton>
+            
           </SignedOut>
 
           <SignedIn>
