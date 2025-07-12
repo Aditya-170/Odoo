@@ -1,6 +1,9 @@
 "use client";
 import React, { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import {
+  useUser,
+} from "@clerk/nextjs";
 
 async function uploadToCloudinary(file) {
   const formData = new FormData();
@@ -15,6 +18,7 @@ async function uploadToCloudinary(file) {
 
 const AddProduct = () => {
   const router = useRouter();
+  const { user } = useUser();
   const [form, setForm] = useState({
     title: '',
     description: '',

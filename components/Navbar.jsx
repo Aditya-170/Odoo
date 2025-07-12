@@ -35,7 +35,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center space-x-8">
             <Link href="/home" className="text-purple-300 hover:text-purple-200 transition-colors">Home</Link>
             <Link href="/about" className="text-purple-300 hover:text-purple-200 transition-colors">About</Link>
-            <Link href="#" className="text-purple-300 hover:text-purple-200 transition-colors">Features</Link>
+            <Link href="/swaps" className="text-purple-300 hover:text-purple-200 transition-colors">Swaps</Link>
             <Link href="/products" className="text-purple-300 hover:text-purple-200 transition-colors">Items</Link>
             <Link href="/contact" className="text-purple-300 hover:text-purple-200 transition-colors">Contact</Link>
           </div>
@@ -82,8 +82,8 @@ export default function Navbar() {
         <div className="md:hidden px-6 pb-4 space-y-3 text-sm font-bold text-center text-purple-300">
           <Link href="/home" className="block hover:text-purple-200">Home</Link>
           <Link href="/about" className="block hover:text-purple-200">About</Link>
-          <Link href="#" className="block hover:text-purple-200">Features</Link>
-          <Link href="#" className="block hover:text-purple-200">Items</Link>
+          <Link href="/swaps" className="block hover:text-purple-200">Swaps</Link>
+          <Link href="/products" className="block hover:text-purple-200">Items</Link>
           <Link href="/contact" className="block hover:text-purple-200">Contact</Link>
           <hr className="border-purple-600/40 my-2" />
 
