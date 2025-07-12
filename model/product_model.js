@@ -11,7 +11,9 @@ const ProductSchema = new mongoose.Schema({
   images: [String],
   status: { type: String, default: 'Available' },
   ownerId: { type: String, required: true },
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now },
+  point: Number,
+
 });
 
 export default mongoose.models.Product || mongoose.model('Product', ProductSchema);
