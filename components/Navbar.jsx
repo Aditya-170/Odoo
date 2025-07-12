@@ -7,7 +7,7 @@ import {
   UserButton,
   useUser,
 } from "@clerk/nextjs";
-import { Menu, Sparkles, X } from "lucide-react";
+import { Bell, Menu, Sparkles, X } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -48,11 +48,23 @@ export default function Navbar() {
                   Sign In
                 </button>
               </SignInButton>
-              
+
             </SignedOut>
 
             <SignedIn>
               <div className="flex items-center gap-x-4">
+                {/* Notification Bell */}
+                <div
+                  className="relative cursor-pointer"
+                  onClick={() => router.push("/notification")}
+                >
+                  <Bell className="w-6 h-6 text-purple-300 hover:text-purple-100" />
+                  {/* Unread Count */}
+                  <span className="absolute -top-1 -right-1 text-xs bg-pink-500 text-white rounded-full w-4 h-4 flex items-center justify-center animate-pulse">
+                    3 {/* Replace with dynamic count */}
+                  </span>
+                </div>
+
                 <p
                   className="text-sm text-purple-300 cursor-pointer hover:text-purple-100"
                   onClick={() => router.push("/profile")}
@@ -93,7 +105,7 @@ export default function Navbar() {
                 Sign In
               </button>
             </SignInButton>
-            
+
           </SignedOut>
 
           <SignedIn>

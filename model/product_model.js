@@ -2,15 +2,16 @@ import mongoose from 'mongoose';
 
 const ProductSchema = new mongoose.Schema({
   title: String,
+  ownerId: { type: String, required: true },
   description: String,
   category: String,
   type: String,
   size: String,
+  point: Number,
   condition: String,
   tags: String,
   images: [String],
   status: { type: String, default: 'Available' },
-  ownerId: { type: String, required: true },
   createdAt: { type: Date, default: Date.now }
 });
 
