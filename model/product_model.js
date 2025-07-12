@@ -12,7 +12,9 @@ const ProductSchema = new mongoose.Schema({
   tags: String,
   images: [String],
   status: { type: String, default: 'Available' },
+
   createdAt: { type: Date, default: Date.now }
+
 });
 
 export default mongoose.models.Product || mongoose.model('Product', ProductSchema);
