@@ -133,7 +133,7 @@ export default function ProfilePage() {
                 className="min-w-[160px] bg-[#1f012f] rounded-lg shadow-md border border-purple-700 p-3 hover:scale-105 transition-transform"
               >
                 <img
-                  src={item.image}
+                  src={item.images}
                   alt={item.title}
                   className="w-full h-32 object-cover rounded-md mb-2"
                 />
