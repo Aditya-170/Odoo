@@ -1,9 +1,7 @@
 "use client";
+import { useUser } from '@clerk/nextjs';
 import React, { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import {
-  useUser,
-} from "@clerk/nextjs";
 
 async function uploadToCloudinary(file) {
   const formData = new FormData();
@@ -79,7 +77,7 @@ const AddProduct = () => {
       return;
     }
     setUploading(false);
-    const payload = { ...form, images };
+    const payload = { ...form, images, ownerId: user.id };
     const res = await fetch('/api/products', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -170,7 +168,9 @@ const AddProduct = () => {
           <button type="submit" disabled={uploading} className="mt-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-3 rounded-xl shadow-lg shadow-purple-500/25 hover:shadow-xl hover:shadow-purple-500/40 transition-all duration-300 text-lg">
             {uploading ? 'Uploading...' : 'Submit'}
           </button>
-          {message && <p className={`text-center font-semibold ${message.includes('success') ? 'text-green-400' : 'text-red-400'}`}>{message}</p>}
+          {message && (
+            <p className={`text-center font-semibold ${message.includes('success') ? 'text-green-400' : 'text-red-400'}`}>{message}</p>
+          )}
         </form>
       </div>
       <style jsx>{`
