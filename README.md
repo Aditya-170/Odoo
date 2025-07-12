@@ -1,11 +1,12 @@
-# 👗 ReWear – Community Clothing Exchange
+#  ReWear – Community Clothing Exchange
 
-> **Problem Statement:** Problem Statement 3  
-> **Team Name:** Team 1828
+> **Problem Statement :** Problem Statement 3  
+> **Team Name :** Team 1828
+> **Video Link :** 
 
 ---
 
-## 🧑‍🤝‍🧑 Team: **Team 1828**
+## **Team 1828**
 
 | Member        | Email Address                      |
 |---------------|------------------------------------|
