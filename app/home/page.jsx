@@ -245,7 +245,7 @@ const LandingPage = () => {
 
             {/* Enhanced CTA Buttons */}
             <div className="flex flex-wrap justify-center gap-4 mb-16">
-              <Link href="/swap">
+              <Link href="/swaps">
                 <button className="group relative px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full font-semibold text-white shadow-lg hover:shadow-purple-500/25 transition-all duration-300 transform hover:scale-105">
                   <span className="flex items-center space-x-2">
                     <Heart className="w-5 h-5" />
