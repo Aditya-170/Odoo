@@ -1,8 +1,9 @@
 #  ReWear – Community Clothing Exchange
 
-> **Problem Statement :** Problem Statement 3  
-> **Team Name :** Team 1828
-> **Video Link :** 
+**Problem Statement :** Problem Statement 3  
+**Team Name :** Team 1828  
+**Video Link :**  
+
 
 ---
 
