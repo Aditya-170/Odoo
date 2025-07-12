@@ -1,5 +1,6 @@
 "use client";
-import React, { useState } from "react";
+
+import React, { useEffect, useState } from "react";
 import {
   SignedIn,
   SignedOut,
@@ -7,14 +8,37 @@ import {
   UserButton,
   useUser,
 } from "@clerk/nextjs";
-import { Bell, Menu, Sparkles, X } from "lucide-react";
+import { Bell, Menu, Shield, Sparkles, X } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [unreadCount, setUnreadCount] = useState(0);
   const { user } = useUser();
   const router = useRouter();
+
+  // Fetch unread notification count
+  useEffect(() => {
+    const fetchUnread = async () => {
+      if (!user) return;
+
+      try {
+        const res = await fetch("/api/notifications/unread-count", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ clerkUserId: user.id }),
+        });
+
+        const data = await res.json();
+        if (res.ok) setUnreadCount(data.count);
+      } catch (err) {
+        console.error("Failed to fetch unread count:", err);
+      }
+    };
+
+    fetchUnread();
+  }, [user]);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-purple-500/20">
@@ -28,7 +52,6 @@ export default function Navbar() {
             <span className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
               ReWear
             </span>
-
           </div>
 
           {/* Desktop Nav */}
@@ -48,23 +71,33 @@ export default function Navbar() {
                   Sign In
                 </button>
               </SignInButton>
-
             </SignedOut>
 
             <SignedIn>
               <div className="flex items-center gap-x-4">
-                {/* Notification Bell */}
+                {/* 🔔 Notification Bell */}
                 <div
                   className="relative cursor-pointer"
                   onClick={() => router.push("/notification")}
                 >
                   <Bell className="w-6 h-6 text-purple-300 hover:text-purple-100" />
-                  {/* Unread Count */}
-                  <span className="absolute -top-1 -right-1 text-xs bg-pink-500 text-white rounded-full w-4 h-4 flex items-center justify-center animate-pulse">
-                    3 {/* Replace with dynamic count */}
-                  </span>
+                  {unreadCount > 0 && (
+                    <span className="absolute -top-1 -right-1 text-xs bg-pink-500 text-white rounded-full w-4 h-4 flex items-center justify-center animate-pulse">
+                      {unreadCount}
+                    </span>
+                  )}
                 </div>
 
+                {/* 🛡️ Admin Button */}
+                <button
+                  className="ml-1"
+                  onClick={() => router.push("/admin")}
+                  title="Admin Panel"
+                >
+                  <Shield className="w-5 h-5 text-purple-300 hover:text-purple-100" />
+                </button>
+
+                {/* 👤 User Info */}
                 <p
                   className="text-sm text-purple-300 cursor-pointer hover:text-purple-100"
                   onClick={() => router.push("/profile")}
@@ -105,14 +138,44 @@ export default function Navbar() {
                 Sign In
               </button>
             </SignInButton>
-
           </SignedOut>
 
           <SignedIn>
-            <div className="flex items-center justify-center gap-x-3">
+            <div className="flex flex-col items-center gap-y-2">
+              {/* Notification Bell */}
+              <div
+                className="relative cursor-pointer"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  router.push("/notification");
+                }}
+              >
+                <Bell className="w-6 h-6 text-purple-300 hover:text-purple-100" />
+                {unreadCount > 0 && (
+                  <span className="absolute -top-1 -right-1 text-xs bg-pink-500 text-white rounded-full w-4 h-4 flex items-center justify-center animate-pulse">
+                    {unreadCount}
+                  </span>
+                )}
+              </div>
+
+              {/* Admin */}
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  router.push("/admin");
+                }}
+                title="Admin Panel"
+              >
+                <Shield className="w-5 h-5 text-purple-300 hover:text-purple-100" />
+              </button>
+
+              {/* Profile */}
               <p
                 className="cursor-pointer hover:text-purple-200"
-                onClick={() => router.push("/profile")}
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  router.push("/profile");
+                }}
               >
                 Hi, {user?.firstName}
               </p>

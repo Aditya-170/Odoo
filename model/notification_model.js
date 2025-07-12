@@ -1,12 +1,13 @@
 // If not already created
+import mongoose from "mongoose";
 const notificationSchema = new mongoose.Schema({
   user: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     ref: "User",
     required: true,
   },
   swap: {
-    type: mongoose.Schema.Types.ObjectId,
+    type:String,
     ref: "SwapItem",
     required: true,
   },
