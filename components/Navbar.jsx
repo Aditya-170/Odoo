@@ -55,10 +55,8 @@ export default function Navbar() {
           </button>
 
         </div>
-        
-        <button className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-white font-medium hover:from-purple-600 hover:to-pink-600 transition-all duration-300">
-          Sign In
-        </button>
+
+
       </div>
 
       {/* Mobile Dropdown */}
@@ -72,7 +70,7 @@ export default function Navbar() {
           <hr className="border-purple-600 my-2" />
           <SignedOut>
             <SignInButton>
-              <button className="block w-full text-white hover:text-[#ff4ecd] font-bold">
+              <button className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-white font-medium hover:from-purple-600 hover:to-pink-600 transition-all duration-300">
                 Sign In
               </button>
             </SignInButton>
